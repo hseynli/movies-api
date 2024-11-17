@@ -4,6 +4,7 @@ using Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Moes.Application.Services;
 using FluentValidation;
+using Movies.Application.Repositories;
 
 namespace Application;
 
@@ -13,6 +14,8 @@ public static class ApplicationServiceCollectionExtensions
     {
         services.AddSingleton<IMovieRepository, MovieRepository>();
         services.AddSingleton<IMovieService, MovieService>();
+        services.AddSingleton<IRatingRepository, RatingRepository>();
+        services.AddSingleton<IRatingService, RatingService>();
         services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
         return services;
     }
