@@ -23,7 +23,7 @@ public class GetAllMoviesOptionsValidator : AbstractValidator<GetAllMoviesOption
             .GreaterThanOrEqualTo(1);
         
         RuleFor(x => x.PageSize)
-            .InclusiveBetween(1, 25)
+            .InclusiveBetween(1, 2500)
             .WithMessage("You can get between 1 and 25 movies per page");
     }
 }

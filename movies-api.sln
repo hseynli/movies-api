@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{CC9A726B-9851-4923-B249-A178EE0A6D26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{CC9A726B-9851-4923-B249-A178EE0A6D26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{103B9BFD-6E35-49B6-A6CF-4BC21016BC2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{103B9BFD-6E35-49B6-A6CF-4BC21016BC2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{26DF1EA3-7972-450F-A0C3-C16CE05F9A1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{26DF1EA3-7972-450F-A0C3-C16CE05F9A1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Identity", "API.Identity\API.Identity.csproj", "{708C82BC-F9B4-46F8-99FF-B929C28986E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{26DF1EA3-7972-450F-A0C3-C16CE05F9A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26DF1EA3-7972-450F-A0C3-C16CE05F9A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26DF1EA3-7972-450F-A0C3-C16CE05F9A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{708C82BC-F9B4-46F8-99FF-B929C28986E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{708C82BC-F9B4-46F8-99FF-B929C28986E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{708C82BC-F9B4-46F8-99FF-B929C28986E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{708C82BC-F9B4-46F8-99FF-B929C28986E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
