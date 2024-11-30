@@ -42,7 +42,7 @@ public static class ContractMapping
         };
     }
 
-    public static MoviesResponse MapToResponse(this IEnumerable<Movie> movies, int page, int pageSize, int totalCount)
+    public static MoviesResponse MapToResponse(this IEnumerable<Movie> movies, int? page, int? pageSize, int totalCount)
     {
         return new MoviesResponse
         {
