@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using API;
 using Asp.Versioning;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace API.Controllers;
 
@@ -16,13 +17,20 @@ namespace API.Controllers;
 public class MoviesV1Controller : ControllerBase
 {
     private readonly IMovieService _movieService;
+    private readonly IOutputCacheStore _outputCacheStore;
 
-    public MoviesV1Controller(IMovieService movieService)
+    public MoviesV1Controller(IMovieService movieService, IOutputCacheStore outputCacheStore)
     {
         _movieService = movieService;
+        _outputCacheStore = outputCacheStore;
     }
 
     [HttpGet(ApiEndpoints.Movies.Get)]
+    [OutputCache(PolicyName = "MovieCache")]
+    //[ResponseCache(Duration = 30, VaryByHeader = "Accept, Accept-Encoding", Location = ResponseCacheLocation.Any)]
+    [ProducesResponseType(typeof(MoviesResponse), StatusCodes.Status200OK)]
+    // Use it filter for just validating x-api-key not jwt token
+    //[ServiceFilter(typeof(ApiKeyAuthFilter))]
     public async Task<IActionResult> GetAll([FromQuery] GetAllMoviesRequest request, CancellationToken token)
     {
         var userId = HttpContext.GetUserId();
@@ -36,7 +44,11 @@ public class MoviesV1Controller : ControllerBase
         return Ok(moviesResponse);
     }
 
-    [HttpGet(ApiEndpoints.Movies.GetById)]    
+    [HttpGet(ApiEndpoints.Movies.GetById)]
+    [OutputCache(PolicyName = "MovieCache")]
+    //[ResponseCache(Duration = 30, VaryByHeader = "Accept, Accept-Encoding", Location = ResponseCacheLocation.Any)]
+    [ProducesResponseType(typeof(MovieResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetV1(string idOrSlug, [FromServices] LinkGenerator linkGenerator, CancellationToken token)
     {
         var userId = HttpContext.GetUserId();
@@ -78,17 +90,10 @@ public class MoviesV1Controller : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet(ApiEndpoints.Movies.GetById)]
-    //[ApiVersion("0.1", Deprecated = true)]
-    [MapToApiVersion(2.0)]
-    [ApiVersion("2.0")]
-    public IActionResult GetV2(string idOrSlug, [FromServices] LinkGenerator linkGenerator, CancellationToken token)
-    {       
-        return Ok(new { Message = "API version is deprecated" });
-    }
-
     [Authorize(AuthConstants.TrustedMemberPolicyName)]
     [HttpPost(ApiEndpoints.Movies.Create)]
+    [ProducesResponseType(typeof(MovieResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] CreateMovieRequest request, CancellationToken token)
     {
         var newMovie = request.MapToMovie();
@@ -97,11 +102,17 @@ public class MoviesV1Controller : ControllerBase
 
         var movieResponse = newMovie.MapToResponse();
 
+        await _outputCacheStore.EvictByTagAsync("movies", token);        
+
         return CreatedAtAction(nameof(GetV1), new { idOrSlug = newMovie.Id }, movieResponse);
     }
 
+    // JWT token or x-api-key
     [Authorize(AuthConstants.TrustedMemberPolicyName)]
     [HttpPut(ApiEndpoints.Movies.Update)]
+    [ProducesResponseType(typeof(MovieResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ValidationFailureResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateMovieRequest request, CancellationToken token)
     {
         Movie movie = request.MapToMovie(id);
@@ -120,6 +131,8 @@ public class MoviesV1Controller : ControllerBase
 
     [Authorize(AuthConstants.AdminUserPolicyName)]
     [HttpDelete(ApiEndpoints.Movies.Delete)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken token)
     {
         bool deleted = await _movieService.DeleteByIdAsync(id, token);

@@ -32,7 +32,7 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
             In = ParameterLocation.Header,
             Description = "Please provide a valid token",
             Name = "Authorization",
-            Type = SecuritySchemeType.ApiKey,
+            Type = SecuritySchemeType.Http,
             BearerFormat = "JWT",
             Scheme = "Bearer"
         });

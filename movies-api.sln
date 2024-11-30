@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{26DF1EA3-7972-450F-A0C3-C16CE05F9A1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Identity", "API.Identity\API.Identity.csproj", "{708C82BC-F9B4-46F8-99FF-B929C28986E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Identity", "API.Identity\API.Identity.csproj", "{708C82BC-F9B4-46F8-99FF-B929C28986E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Sdk", "API.Sdk\API.Sdk.csproj", "{93E70B9F-033E-4167-8A71-6903AB52FF23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Sdk.Consumer", "Api.Sdk.Consumer\Api.Sdk.Consumer.csproj", "{CF93BAD4-1C8F-4413-911C-4A12E26493E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{708C82BC-F9B4-46F8-99FF-B929C28986E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{708C82BC-F9B4-46F8-99FF-B929C28986E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{708C82BC-F9B4-46F8-99FF-B929C28986E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93E70B9F-033E-4167-8A71-6903AB52FF23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93E70B9F-033E-4167-8A71-6903AB52FF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93E70B9F-033E-4167-8A71-6903AB52FF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93E70B9F-033E-4167-8A71-6903AB52FF23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF93BAD4-1C8F-4413-911C-4A12E26493E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF93BAD4-1C8F-4413-911C-4A12E26493E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF93BAD4-1C8F-4413-911C-4A12E26493E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF93BAD4-1C8F-4413-911C-4A12E26493E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

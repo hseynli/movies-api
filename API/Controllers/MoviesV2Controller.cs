@@ -17,6 +17,7 @@ public class MoviesV2Controller : ControllerBase
 
     [HttpGet(ApiEndpoints.Movies.GetById)]
     //[MapToApiVersion(2.0)]
+    //[ApiVersion("0.1", Deprecated = true)]
     public IActionResult GetV2(string idOrSlug, [FromServices] LinkGenerator linkGenerator, CancellationToken token)
     {       
         return Ok(new { Message = "API version is deprecated" });
